@@ -1,6 +1,8 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <queue>
+#include <pthread.h>
 
 using namespace std;
 
@@ -29,7 +31,7 @@ const char *random_unit()
     size_t idx = random % (pic_cnt);
 
     const char *c = &pics[idx * (strlen("🏤 "))];
-    cout << "idx:" << idx << " " << c << endl;
+    // cout << "idx:" << idx << " " << c << endl;
     return c;
 }
 
@@ -59,6 +61,16 @@ private:
 } Block;
 
 char _Block::BLANK[3] = {' ', ' ', '\0'};
+
+typedef enum
+{
+    OPER_LEFT,
+    OPER_RIGHT,
+    OPER_UP,
+    OPER_DOWN
+} OPER;
+
+static queue<OPER> opers;
 
 int main()
 {
