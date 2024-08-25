@@ -8,6 +8,10 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 message("build puzzle...")
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(CMAKE_C_COMPILER "/Library/Developer/CommandLineTools/usr/bin/gcc")
 set(CMAKE_CXX_COMPILER "/Library/Developer/CommandLineTools/usr/bin/g++")
 
