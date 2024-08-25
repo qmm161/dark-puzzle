@@ -95,6 +95,15 @@ static void clear_screen()
     printf("\e[1;1H\e[2J");
 }
 
+static bool need_print(size_t line, size_t column, int pos_l, int pos_c)
+{
+    if (((line >= (pos_l - 1)) && (line <= (pos_l + 1))) && ((column >= (pos_c - 1)) && (column <= (pos_c + 1))))
+    {
+        return true;
+    }
+    return false;
+}
+
 static void *thread_func(void *arg)
 {
     Block units[10][10] = {
@@ -147,10 +156,13 @@ static void *thread_func(void *arg)
                 {
                     cout << "👧";
                 }
+                else if (need_print(line, column, pos_l, pos_c))
+                {
+                    cout << units[line][column].str;
+                }
                 else
                 {
-
-                    cout << units[line][column].str;
+                    cout << "**";
                 }
             }
             cout << endl;
